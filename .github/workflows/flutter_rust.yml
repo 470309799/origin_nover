@@ -35,11 +35,11 @@ jobs:
           ${{ runner.os }}-flutter-
 
     # Install JDK 17 (using Temurin)
-    - name: Set up JDK 17
+    - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        java-version: '17'
+        java-version: '11'
 
     # Run Flutter build (APK)
     - name: Build APK

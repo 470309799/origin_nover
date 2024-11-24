@@ -1,4 +1,4 @@
-name: Build APK with Flutter and Rust
+name: Build APK with Flutter
 
 on:
   push:
@@ -33,26 +33,6 @@ jobs:
         key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
         restore-keys: |
           ${{ runner.os }}-flutter-
-
-    # Manually install Rust (no action, just install via bash)
-    - name: Install Rust
-      run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        source $HOME/.cargo/env
-
-    # Cache Cargo dependencies
-    - name: Cache Cargo dependencies
-      uses: actions/cache@v2
-      with:
-        path: ~/.cargo
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}
-        restore-keys: |
-          ${{ runner.os }}-cargo-
-
-    # Install Rust dependencies
-    - name: Install Rust dependencies
-      run: |
-        cargo build --release
 
     # Run Flutter build (APK)
     - name: Build APK

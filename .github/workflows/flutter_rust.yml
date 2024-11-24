@@ -34,9 +34,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-flutter-
 
-    # Set up Rust (updated)
+    # Set up Rust (using actions/setup-rust)
     - name: Set up Rust
-      uses: rust-lang/setup-rust@v1
+      uses: actions/setup-rust@v1
       with:
         rust-version: 'stable'
 

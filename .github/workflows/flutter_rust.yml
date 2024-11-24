@@ -34,9 +34,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-flutter-
 
-    # Install Rust
+    # Set up Rust (updated)
     - name: Set up Rust
-      uses: actions/setup-rust@v1
+      uses: rust-lang/setup-rust@v1
       with:
         rust-version: 'stable'
 
@@ -60,9 +60,9 @@ jobs:
         flutter pub get
         flutter build apk --release
 
-    # Upload the APK as an artifact
+    # Upload the APK as an artifact (updated to v3)
     - name: Upload APK
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: app-release.apk
         path: build/app/outputs/flutter-apk/app-release.apk

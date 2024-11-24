@@ -37,7 +37,7 @@ jobs:
     # Manually install Rust (no action, just install via bash)
     - name: Install Rust
       run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
         source $HOME/.cargo/env
 
     # Cache Cargo dependencies

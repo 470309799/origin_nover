@@ -1,0 +1,68 @@
+name: Build APK with Flutter and Rust
+
+on:
+  push:
+    branches:
+      - maser
+  pull_request:
+    branches:
+      - maser
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Set up Flutter
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 'stable'
+
+    # Cache Flutter dependencies
+    - name: Cache Flutter dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.pub-cache
+          ~/.flutter
+        key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-flutter-
+
+    # Install Rust
+    - name: Set up Rust
+      uses: actions/setup-rust@v1
+      with:
+        rust-version: 'stable'
+
+    # Cache Cargo dependencies
+    - name: Cache Cargo dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cargo
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-
+
+    # Install Rust dependencies
+    - name: Install Rust dependencies
+      run: |
+        cargo build --release
+
+    # Run Flutter build (APK)
+    - name: Build APK
+      run: |
+        flutter pub get
+        flutter build apk --release
+
+    # Upload the APK as an artifact
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release.apk
+        path: build/app/outputs/flutter-apk/app-release.apk

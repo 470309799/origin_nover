@@ -3,10 +3,10 @@ name: Build APK with Flutter and Rust
 on:
   push:
     branches:
-      - maser
+      - master
   pull_request:
     branches:
-      - maser
+      - master
 
 jobs:
   build:

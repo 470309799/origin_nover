@@ -17,11 +17,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Set up Flutter
+    # Set up Flutter with a specific version
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: 'stable'
+        flutter-version: '3.7.0'  # 指定一个明确的版本号，而不是使用 stable
 
     # Cache Flutter dependencies
     - name: Cache Flutter dependencies

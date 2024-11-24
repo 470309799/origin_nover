@@ -21,7 +21,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.10.0'  # 升级到支持 Dart 3.x 的 Flutter 版本
+        flutter-version: '3.24.5'  # 升级到支持 Dart 3.x 的 Flutter 版本
 
     # Cache Flutter dependencies
     - name: Cache Flutter dependencies

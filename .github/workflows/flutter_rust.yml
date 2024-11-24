@@ -11,17 +11,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     # Checkout the code from the repository
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Set up Flutter with a specific version
+    # Set up Flutter with a specific version (3.10.0 or later)
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.24.5'  # 指定一个明确的版本号，而不是使用 stable
+        flutter-version: '3.10.0'  # 升级到支持 Dart 3.x 的 Flutter 版本
 
     # Cache Flutter dependencies
     - name: Cache Flutter dependencies
@@ -33,6 +33,13 @@ jobs:
         key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
         restore-keys: |
           ${{ runner.os }}-flutter-
+
+    # Install JDK 17
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adoptopenjdk'
+        java-version: '17'
 
     # Run Flutter build (APK)
     - name: Build APK

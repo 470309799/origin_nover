@@ -21,7 +21,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.7.0'  # 指定一个明确的版本号，而不是使用 stable
+        flutter-version: '3.24.5'  # 指定一个明确的版本号，而不是使用 stable
 
     # Cache Flutter dependencies
     - name: Cache Flutter dependencies

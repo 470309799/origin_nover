@@ -34,11 +34,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-flutter-
 
-    # Set up Rust (using actions/setup-rust)
-    - name: Set up Rust
-      uses: actions/setup-rust@v1
-      with:
-        rust-version: 'stable'
+    # Manually install Rust (no action, just install via bash)
+    - name: Install Rust
+      run: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        source $HOME/.cargo/env
 
     # Cache Cargo dependencies
     - name: Cache Cargo dependencies
@@ -60,7 +60,7 @@ jobs:
         flutter pub get
         flutter build apk --release
 
-    # Upload the APK as an artifact (updated to v3)
+    # Upload the APK as an artifact
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:

@@ -17,15 +17,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    # 设置 Flutter 环境
+    # 设置 Flutter 环境，使用具体的 Flutter 和 Dart 版本
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.13.8' # 确保指定项目所需版本
+        flutter-version: '3.13.8'  # 明确使用支持 Dart 3.3.0+ 的版本
 
-    # 验证 Flutter 安装
-    - name: Verify Flutter Installation
-      run: flutter --version
+    # 验证 Flutter 和 Dart 版本
+    - name: Verify Flutter and Dart Versions
+      run: |
+        flutter --version
+        dart --version
 
     # 获取 Flutter 依赖
     - name: Install Flutter Dependencies

@@ -21,8 +21,8 @@ jobs:
     - name: Install Flutter
       run: |
         git clone https://github.com/flutter/flutter.git -b stable
-        echo "$PWD/flutter/bin" >> $GITHUB_PATH
-        source $GITHUB_PATH
+        echo "$PWD/flutter/bin" >> $GITHUB_PATH  # 将 flutter 添加到 PATH 中
+        echo "PATH=\$PATH:$PWD/flutter/bin" >> $GITHUB_ENV  # 将 flutter 添加到 GITHUB_ENV
         flutter --version  # 确认 Flutter 安装成功
 
     # 获取 Flutter 依赖

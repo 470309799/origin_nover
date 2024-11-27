@@ -17,13 +17,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    # 安装 Flutter
-    - name: Install Flutter
-      run: |
-        git clone https://github.com/flutter/flutter.git -b stable
-        echo "$PWD/flutter/bin" >> $GITHUB_PATH  # 将 flutter 添加到 PATH 中
-        echo "PATH=\$PATH:$PWD/flutter/bin" >> $GITHUB_ENV  # 将 flutter 添加到 GITHUB_ENV
-        flutter --version  # 确认 Flutter 安装成功
+    # 设置 Flutter 版本为 3.13.0 或更高版本，支持 Dart 3.3.0
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.13.0'  # 推荐使用此版本
 
     # 获取 Flutter 依赖
     - name: Install Flutter Dependencies

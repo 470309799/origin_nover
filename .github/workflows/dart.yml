@@ -17,17 +17,12 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    # 设置 Flutter 环境，使用指定版本
-    - name: Setup Flutter
-      uses: flutter/flutter-action@v2
-      with:
-        flutter-version: '3.14.0'
-
-    # 验证 Flutter 和 Dart 版本
-    - name: Verify Flutter and Dart Versions
+    # 安装 Flutter
+    - name: Install Flutter
       run: |
+        git clone https://github.com/flutter/flutter.git -b stable
+        export PATH="$PATH:`pwd`/flutter/bin"
         flutter --version
-        dart --version
 
     # 获取 Flutter 依赖
     - name: Install Flutter Dependencies

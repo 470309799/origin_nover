@@ -26,11 +26,13 @@ jobs:
 
     # 安装 OpenSSL
     - name: Install OpenSSL
-      run: sudo apt-get install libssl-dev
+      run: sudo apt-get install libssl-dev pkg-config
 
-    # 设置 OpenSSL 环境变量
-    - name: Set OPENSSL_DIR
-      run: export OPENSSL_DIR=/usr/local/ssl
+    - name: Set OPENSSL_DIR and PKG_CONFIG
+      run: |
+        export OPENSSL_DIR=/usr/local/ssl
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+        export PKG_CONFIG_SYSROOT_DIR=/usr/local
 
     # 设置 Flutter 版本
     - name: Setup Flutter

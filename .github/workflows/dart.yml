@@ -19,7 +19,7 @@ jobs:
 
     # 设置 Flutter 环境，使用指定版本
     - name: Setup Flutter
-      uses: actions/setup-flutter@v2
+      uses: flutter/flutter-action@v2
       with:
         flutter-version: '3.14.0'
 

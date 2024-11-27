@@ -32,7 +32,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'adoptopenjdk'
+        distribution: 'temurin'  # 使用 Temurin JDK
 
     # 设置 Rust 环境
     - name: Setup Rust

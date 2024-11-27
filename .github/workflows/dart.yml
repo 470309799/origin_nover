@@ -1,0 +1,66 @@
+name: Build Origin Nover
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 检出代码
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # 设置 Flutter 环境
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 'stable'
+
+    # 获取 Flutter 依赖
+    - name: Install Flutter Dependencies
+      run: flutter pub get
+
+    # 设置 Rust 环境
+    - name: Setup Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    # 构建 Rust 代码
+    - name: Build Rust
+      run: |
+        cd rust
+        cargo build --release
+
+    # 设置 CMake 和 C++ 环境
+    - name: Install CMake and Dependencies
+      run: sudo apt-get install -y cmake build-essential
+
+    # 构建 Flutter 应用（安卓）
+    - name: Build Flutter APK
+      run: flutter build apk --release
+
+    # 构建 iOS 应用（如需支持）
+    - name: Build Flutter iOS
+      if: runner.os == 'macOS'
+      run: |
+        flutter build ios --release
+
+    # 测试应用
+    - name: Run Tests
+      run: flutter test
+
+    # 上传构建产物
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: flutter-apk
+        path: build/app/outputs/flutter-apk/app-release.apk

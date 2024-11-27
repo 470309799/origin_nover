@@ -22,7 +22,7 @@ jobs:
       run: |
         git clone https://github.com/flutter/flutter.git -b stable
         echo "$PWD/flutter/bin" >> $GITHUB_PATH
-        flutter --version
+        flutter doctor
 
     # 获取 Flutter 依赖
     - name: Install Flutter Dependencies
